@@ -13,6 +13,7 @@ module.exports = {
     // proxyTable: {},
     proxyTable: {
         '/': { //此处并非一定和url一致。
+            // target: 'http://192.168.1.106:8888',
             target: 'http://10.60.6.48:8888',
             changeOrigin: true, //允许跨域
             pathRewrite: {
