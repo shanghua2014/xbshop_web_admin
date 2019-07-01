@@ -1,3 +1,3 @@
 <template>
-    <div>首页</div>
+    <div>欢迎光临</div>
 </template>

@@ -22,9 +22,14 @@ export default new Router({
                     name:'后台信息'
                 },
                 {
-                    path: '/Headpic',
-                    component: resolve => require(['@/pages/headpic/headpic'], resolve),
-                    name: '头图管理router'
+                    path: '/headpic',
+                    component: resolve => require(['@/pages/headpic/index'], resolve),
+                    name: '头图管理'
+                },
+                {
+                    path: '/headpic/add',
+                    component: resolve => require(['@/pages/headpic/headpic-add'], resolve),
+                    name: '头图管理 - 添加图片'
                 },
                 {
                     path: '/goods',
