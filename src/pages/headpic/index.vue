@@ -1,12 +1,13 @@
 <template>
     <div class="headpic">
         <a-row>
-            <a-col :span="22"></a-col>
             <a-col :span="2" to="">
                 <router-link to="/headpic/add">
                     <a-button type="primary" icon="plus-circle" block>添加</a-button>
                 </router-link>
             </a-col>
+            <a-col :span="20"><b>{{this.$route.name}}</b></a-col>
+            <a-col :span="2"></a-col>
         </a-row>
         <a-row class="titles">
             <a-col :span="2">ID</a-col>
@@ -17,7 +18,7 @@
         <a-row v-for="(item, index) in lists" :key="index" class="list">
             <a-col :span="2">{{item.id}}</a-col>
             <a-col :span="4">{{item.title}}</a-col>
-            <a-col :span="14"><img :src="'uploads/'+item.picture" :alt="item.title"/></a-col>
+            <a-col :span="14"><img :src="'uploads/'+item.picture" :alt="item.title" /></a-col>
             <a-col :span="4">
                 <a-popconfirm title="确认删除么?" @confirm="confirm(item.id, item.picture, index)" okText="Yes"
                     cancelText="No">
@@ -53,7 +54,7 @@
                         this.$message.success('删除成功！');
                     }
                 });
-            }, 
+            },
             getData() {
                 this.axios({
                     url: '/api/bootstrap/list',
@@ -73,6 +74,11 @@
 
 </script>
 <style>
+    .headpic .ant-row {
+        margin-left: 16px;
+        margin-bottom: 16px;
+    }
+
     .headpic .list {
         border: 1px solid #f3f3f3;
         border-top: 0;

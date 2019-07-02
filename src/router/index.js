@@ -37,9 +37,14 @@ export default new Router({
                     component: resolve => require(['@/pages/goods/index'], resolve),
                     children: [
                         {
-                            path: '/goods/classes',
+                            path: '/classify/list',
                             name:'商品分类',
                             component: resolve => require(['@/pages/goods/classes'], resolve),
+                        },
+                        {
+                            path: '/classify/add',
+                            name:'添加商品分类',
+                            component: resolve => require(['@/pages/goods/classes-add'], resolve),
                         },
                         {
                             path: '/goods/list',

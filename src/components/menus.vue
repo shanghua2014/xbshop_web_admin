@@ -22,7 +22,7 @@
                     商品管理
                 </span>
                 <a-menu-item key="4">
-                    <router-link to="/goods/classes">
+                    <router-link to="/classify/list">
                         商品分类
                     </router-link>
                 </a-menu-item>

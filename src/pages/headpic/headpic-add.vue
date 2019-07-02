@@ -80,7 +80,6 @@
                             this.$router.push({path:'/headpic'});
                         }
                     })
-                    
                 });
             },
             emitEmpty() {
