@@ -11,12 +11,6 @@
                 </a-input>
             </a-form-item>
 
-            <a-form-item label="请输入超链接" :label-col="{ span: 3 }" :wrapper-col="{ span: 10 }">
-                <a-input placeholder="超链接" v-model="link" ref="linkInput">
-                    <a-icon slot="prefix" type="paper-clip" />
-                    <a-icon v-if="link" slot="suffix" type="close-circle" />
-                </a-input>
-            </a-form-item>
         </div>
 
         <br>
@@ -71,7 +65,6 @@
                         url: '/api/bootstrap/add',
                         data: this.qs.stringify({
                             title: this.title,
-                            link: this.link,
                             pic: this.imgName
                         })
                     }).then(res => {
@@ -85,10 +78,6 @@
             emitEmpty() {
                 this.$refs.titleInput.focus()
                 this.title = ''
-            },
-            emitEmptyLink() {
-                this.$refs.linkInput.focus()
-                this.link = ''
             },
             handleCancel() {
                 this.previewVisible = false

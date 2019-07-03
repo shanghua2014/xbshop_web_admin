@@ -1,46 +1,69 @@
 <template>
-    <div class="headpic">
-        <a-row>
-            <a-col :span="2" to="">
-                <router-link to="/headpic/add">
-                    <a-button type="primary" icon="plus-circle" block>添加</a-button>
-                </router-link>
-            </a-col>
-            <a-col :span="20"><b>{{this.$route.name}}</b></a-col>
-            <a-col :span="2"></a-col>
-        </a-row>
-        <a-row class="titles">
-            <a-col :span="2">ID</a-col>
-            <a-col :span="4">标题</a-col>
-            <a-col :span="14">图片</a-col>
-            <a-col :span="2">操作</a-col>
-        </a-row>
-        <a-row v-for="(item, index) in lists" :key="index" class="list">
-            <a-col :span="2">{{item.id}}</a-col>
-            <a-col :span="4">{{item.title}}</a-col>
-            <a-col :span="14"><img :src="'uploads/'+item.picture" :alt="item.title" /></a-col>
-            <a-col :span="4">
-                <a-popconfirm title="确认删除么?" @confirm="confirm(item.id, item.picture, index)" okText="Yes"
-                    cancelText="No">
-                    <a href="#">删除</a>
-                </a-popconfirm>
-            </a-col>
-        </a-row>
-    </div>
+    <a-table :columns="columns" :dataSource="data" bordered>
+        <template slot="name" slot-scope="text">
+            <span>{{text}}</span>
+        </template>
+
+        <template slot="title">
+            <a-row>
+                <a-col :span="2" to="">
+                    <router-link to="/headpic/add">
+                        <a-button type="primary" icon="plus-circle" block>添加</a-button>
+                    </router-link>
+                </a-col>
+                <a-col :span="20"><b>{{this.$route.name}}</b></a-col>
+                <a-col :span="2"></a-col>
+            </a-row>
+        </template>
+
+        <span slot="picture" slot-scope="picture">
+            <img :src="'/uploads/'+picture" />
+        </span>
+
+        <template slot="operation" slot-scope="text, record, index">
+            <a-popconfirm v-if="columns.length" title="确定删除?" @confirm="() => onDelete(record.id, record.picture, index)">
+            <a href="javascript:;">删除</a>
+            </a-popconfirm>
+        </template>
+    </a-table>
 </template>
 <script>
+    const columns = [{
+        title: '商品名称',
+        dataIndex: 'pname',
+        key: 'pname',
+        scopedSlots: {
+            customRender: 'pname'
+        },
+    }, {
+        title: '商品图片',
+        dataIndex: 'picture',
+        key: 'picture',
+        scopedSlots: {
+            customRender: 'picture'
+        }
+    }, {
+        title: '操作',
+        dataIndex: 'operation',
+        key: 'operation',
+        scopedSlots: {
+            customRender: 'operation'
+        },
+    }];
+    let data = [];
+
     export default {
         data() {
             return {
-                lists: '',
-                isckick: true
+                data,
+                columns,
             }
         },
         mounted() {
             this.getData()
         },
         methods: {
-            confirm(id, pic, index) {
+            onDelete(id, pic, index) {
                 this.axios({
                     url: '/api/bootstrap/del',
                     method: 'post',
@@ -50,7 +73,7 @@
                     }),
                 }).then(res => {
                     if (res.data.code == 2000) {
-                        this.lists.splice(index, 1);
+                        this.data.splice(index, 1);
                         this.$message.success('删除成功！');
                     }
                 });
@@ -66,7 +89,7 @@
                     type: 'json',
                 }).then(res => {
                     const r = res.data.result;
-                    this.lists = r.list
+                    this.data = r.list
                 });
             }
         }

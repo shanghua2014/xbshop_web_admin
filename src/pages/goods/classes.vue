@@ -5,9 +5,9 @@
         </template>
         <template slot="title">
             <a-row>
-                <a-col :span="2" to="">
+                <a-col :span="3" to="">
                     <router-link to="/classify/add">
-                        <a-button type="primary" icon="plus-circle" block>添加</a-button>
+                        <a-button type="primary" icon="plus-circle" block>添加分类</a-button>
                     </router-link>
                 </a-col>
                 <a-col :span="20"><b>{{this.$route.name}}</b></a-col>
@@ -34,7 +34,7 @@
     }, {
         title: '操作',
         dataIndex: 'operation',
-        key:'',
+        key:'operation',
         scopedSlots: {
             customRender: 'operation'
         },
@@ -61,7 +61,7 @@
         },
         methods:{
             onDelete (key) {
-                console.log(key)
+                alert('暂不可用')
             }
         }
     }

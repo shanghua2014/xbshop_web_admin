@@ -44,13 +44,18 @@ export default new Router({
                         {
                             path: '/classify/add',
                             name:'添加商品分类',
-                            component: resolve => require(['@/pages/goods/classes-add'], resolve),
+                            component: resolve => require(['@/pages/goods/goods-add'], resolve),
                         },
                         {
                             path: '/goods/list',
                             name:'商品列表',
                             component: resolve => require(['@/pages/goods/list'], resolve),
-                        }
+                        },
+                        {
+                            path: '/goods/add',
+                            name:'添加商品',
+                            component: resolve => require(['@/pages/goods/goods-add'], resolve),
+                        },
                     ]
                 },
                 {

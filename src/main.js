@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Layout,Button,Menu,Icon,Breadcrumb,Table,Row,Col,Input,Upload,Modal,Form,message, List, Popconfirm } from 'ant-design-vue';
+import { Layout,Button,Menu,Icon,Breadcrumb,Table,Row,Col,Input,Upload,Modal,Form,message, List, Popconfirm, Tag } from 'ant-design-vue';
 
 import App from './App'
 import router from './router'
@@ -53,6 +53,8 @@ Vue.component(List.name, List)
 Vue.component(List.Item.name, List.Item)
 Vue.component(List.Item.Meta.name, List.Item.Meta)
 Vue.component(Popconfirm.name, Popconfirm)
+Vue.component(Tag.name, Tag)
+Vue.component(Tag.CheckableTag.name, Tag.CheckableTag)
 
 
 
