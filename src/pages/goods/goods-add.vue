@@ -4,7 +4,6 @@
             <a-col :span="20"><b>{{this.$route.name}}</b></a-col>
         </a-row>
         <br>
-
         <a-form-item :label-col="{ span: 2 }" :wrapper-col="{ span: 6 }" label="商品名称">
             <a-input v-decorator="['cname',{rules: [{ required: true, message: '请输入商品名称' }]}]" placeholder="请输入商品名称" />
         </a-form-item>
