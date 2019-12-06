@@ -26,9 +26,6 @@
     export default {
         components: {
             Menus
-        },
-        mounted() {
-            console.log(this.$route.matched)
         }
     }
 

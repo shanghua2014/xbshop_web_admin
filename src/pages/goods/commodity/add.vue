@@ -1,11 +1,15 @@
 <template>
     <a-form :form="form" @submit="handleSubmit">
-        <a-form-item :label-col="{ span: 2 }" :wrapper-col="{ span: 6 }" label="分类名称">
-            <a-input v-decorator="['cname',{rules: [{ required: true, message: '请输入分类名称' }]}]" placeholder="请输入分类名称" />
+        <a-row>
+            <a-col :span="20"><b>{{this.$route.name}}</b></a-col>
+        </a-row>
+        <br>
+        <a-form-item :label-col="{ span: 2 }" :wrapper-col="{ span: 6 }" label="商品名称">
+            <a-input v-decorator="['cname',{rules: [{ required: true, message: '请输入商品名称' }]}]" placeholder="请输入商品名称" />
         </a-form-item>
         <input type="hidden" v-model="id">
 
-        <a-form-item :wrapper-col="wrapperCol" class="row-flex row-flex-space-around row-flex-middle">
+        <a-form-item :wrapper-col="{span: 2,offset: 2}" class="row-flex row-flex-space-around row-flex-middle">
             <a-button type="primary" @click="cancel">
                 取消
             </a-button>
@@ -25,26 +29,8 @@
             return {
                 id: this.$route.query.id ? this.$route.query.id : '',
                 cname: this.$route.query.cname ? this.$route.query.cname : '',
-                wrapperCol: '',
                 form: this.$form.createForm(this),
             };
-        },
-        mounted() {
-            if (this.id && this.cname) {
-                this.wrapperCol = {
-                    span: 2,
-                    offset: 2
-                }
-                this.form.setFieldsValue({
-                    cname: this.cname
-                })
-            } else {
-                this.wrapperCol = {
-                    span: 2,
-                    offset: 2
-                }
-            }
-            console.log(id);
         },
         methods: {
             handleSubmit(e) {
