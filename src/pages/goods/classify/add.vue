@@ -1,13 +1,8 @@
 <template>
     <a-form :form="form" @submit="handleSubmit">
-        <a-row>
-            <a-col :span="20"><b>{{this.$route.name}}</b></a-col>
-        </a-row>
-        <br>
-        <a-form-item :label-col="{ span: 2 }" :wrapper-col="{ span: 6 }" label="商品名称">
-            <a-input v-decorator="['cname',{rules: [{ required: true, message: '请输入商品名称' }]}]" placeholder="请输入商品名称" />
+        <a-form-item :label-col="{ span: 2 }" :wrapper-col="{ span: 6 }" label="分类名称">
+            <a-input v-decorator="['classifyName',{rules: [{ required: true, message: '请输入分类名称' }]}]" placeholder="请输入分类名称" />
         </a-form-item>
-        <input type="hidden" v-model="id">
 
         <a-form-item :wrapper-col="{span: 2,offset: 2}" class="row-flex row-flex-space-around row-flex-middle">
             <a-button type="primary" @click="cancel">
@@ -32,6 +27,13 @@
                 form: this.$form.createForm(this),
             };
         },
+        mounted() {
+            if (this.id && this.cname) {
+                this.form.setFieldsValue({
+                    classifyName: this.cname
+                })
+            }
+        },
         methods: {
             handleSubmit(e) {
                 e.preventDefault();
@@ -46,7 +48,7 @@
                                 url: '/api/classify/update',
                                 data: this.qs.stringify({
                                     id: this.id,
-                                    cname: values.cname
+                                    cname: values.classifyName
                                 })
                             }).then(res => {
                                 if (res.data.code == 2000) {
@@ -61,7 +63,7 @@
                                 method: 'post',
                                 url: '/api/classify/add',
                                 data: this.qs.stringify({
-                                    cname: values.cname
+                                    cname: values.classifyName
                                 }),
                             }).then(res => {
                                 if (res.data.code == 2000) {

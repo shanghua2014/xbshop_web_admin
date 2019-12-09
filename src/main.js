@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Layout,Button,Menu,Icon,Breadcrumb,Table,Row,Col,Input,Upload,Modal,Form,message, List, Popconfirm, Tag } from 'ant-design-vue';
+import { Layout,Button,Menu,Icon,Breadcrumb,Table,Row,Col,Input,Upload,Modal,Form,message, List, Popconfirm, Tag, Select } from 'ant-design-vue';
 
 import App from './App'
 import router from './router'
@@ -18,45 +18,24 @@ Vue.prototype.$confirm = Modal.confirm;
 Vue.prototype.$message = message;
 
 Vue.use(Plugin);
+Vue.use(Button);
+Vue.use(Layout);
+Vue.use(Icon);
+Vue.use(Select);
+Vue.use(Menu);
+Vue.use(Table);
+Vue.use(Breadcrumb);
+Vue.use(Row);
+Vue.use(Col);
+Vue.use(Input);
+Vue.use(Upload);
+Vue.use(Form);
+Vue.use(Modal);
+Vue.use(List);
+Vue.use(Popconfirm);
+Vue.use(Tag);
 
 Vue.config.productionTip = false;
-
-Vue.component(Layout.name, Layout);
-Vue.component(Button.name, Button);
-Vue.component(Icon.name, Icon);
-Vue.component(Layout.Header.name, Layout.Header);
-Vue.component(Layout.Footer.name, Layout.Footer);
-Vue.component(Layout.Sider.name, Layout.Sider);
-Vue.component(Layout.Content.name, Layout.Content);
-Vue.component(Menu.name, Menu)
-Vue.component(Menu.Item.name, Menu.Item)
-Vue.component(Menu.SubMenu.name, Menu.SubMenu)
-Vue.component(Menu.Divider.name, Menu.Divider)
-Vue.component(Menu.ItemGroup.name, Menu.ItemGroup)
-Vue.component(Breadcrumb.name, Breadcrumb)
-Vue.component(Breadcrumb.Item.name, Breadcrumb.Item)
-Vue.component(Table.name, Table)
-Vue.component(Table.Column.name, Table.Column)
-Vue.component(Table.ColumnGroup.name, Table.ColumnGroup)
-Vue.component(Row.name, Row)
-Vue.component(Col.name, Col)
-Vue.component(Input.name, Input)
-Vue.component(Input.Group.name, Input.Group)
-Vue.component(Input.Search.name, Input.Search)
-Vue.component(Input.TextArea.name, Input.TextArea)
-Vue.component(Upload.name, Upload)
-Vue.component(Upload.Dragger.name, Upload.Dragger)
-Vue.component(Modal.name, Modal)
-Vue.component(Form.name, Form)
-Vue.component(Form.Item.name, Form.Item)
-Vue.component(List.name, List)
-Vue.component(List.Item.name, List.Item)
-Vue.component(List.Item.Meta.name, List.Item.Meta)
-Vue.component(Popconfirm.name, Popconfirm)
-Vue.component(Tag.name, Tag)
-Vue.component(Tag.CheckableTag.name, Tag.CheckableTag)
-
-
 
 /* eslint-disable no-new */
 new Vue({

@@ -1,5 +1,5 @@
 <template>
-    <a-table :columns="columns" :dataSource="data" bordered>
+    <a-table :columns="columns" :dataSource="data" :rowKey="data=>data.id" bordered>
         <template slot="name" slot-scope="text">
             <span>{{text}}</span>
         </template>

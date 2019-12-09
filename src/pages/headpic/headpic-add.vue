@@ -59,7 +59,6 @@
                         this.$message.success('请上传图片', 3);
                         return;
                     }
-            console.log(this.title);
                     this.axios({
                         method: 'post',
                         url: '/api/bootstrap/add',
