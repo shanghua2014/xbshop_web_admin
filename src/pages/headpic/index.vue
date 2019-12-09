@@ -16,8 +16,8 @@
             </a-row>
         </template>
 
-        <span slot="picture" slot-scope="picture">
-            <img :src="'/uploads/'+picture" />
+        <span slot="picture" slot-scope="picture, record">
+            <img :src="'/uploads/'+picture"  @click="info('/uploads/'+picture, record.pname)"/>
         </span>
 
         <template slot="operation" slot-scope="text, record, index">
@@ -63,6 +63,15 @@
             this.getData()
         },
         methods: {
+            info(pic, pname='图片') {
+                const h = this.$createElement;
+                this.$success({
+                    title: `${pname}-预览图`,
+                    content: h('div')
+                });
+                const d = document.getElementsByClassName("ant-modal-confirm-content");
+                d[0].innerHTML = `<img src=${pic} width="100%">`
+            },
             onDelete(id, pic, index) {
                 this.axios({
                     url: '/api/bootstrap/del',

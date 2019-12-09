@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Layout,Button,Menu,Icon,Breadcrumb,Table,Row,Col,Input,Upload,Modal,Form,message, List, Popconfirm, Tag, Select } from 'ant-design-vue';
+import { Layout,Button,Menu,Icon,Breadcrumb,Table,Row,Col,Input,Upload,Modal,Form,message, List, Popconfirm, Tag, Select,Popover } from 'ant-design-vue';
 
 import App from './App'
 import router from './router'
@@ -12,9 +12,6 @@ Vue.prototype.axios = axios;
 Vue.prototype.qs = qs; 
 Vue.prototype.$info = Modal.info;
 Vue.prototype.$success = Modal.success;
-Vue.prototype.$error = Modal.error;
-Vue.prototype.$warning = Modal.warning;
-Vue.prototype.$confirm = Modal.confirm;
 Vue.prototype.$message = message;
 
 Vue.use(Plugin);
@@ -34,6 +31,7 @@ Vue.use(Modal);
 Vue.use(List);
 Vue.use(Popconfirm);
 Vue.use(Tag);
+Vue.use(Popover);
 
 Vue.config.productionTip = false;
 

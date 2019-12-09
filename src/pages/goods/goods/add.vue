@@ -162,9 +162,8 @@
                     this.imgName ? submitData.pic = this.imgName : '';
 
                     if (this.id && this.gname) {
-                        console.log('change?')
                         if (Object.keys(submitData).length==1) {
-                            this.$message.success('您未做任何修改')
+                            this.$message.warning('您未做任何修改')
                             return;
                         }
 
@@ -174,7 +173,6 @@
                             url: '/api/goods/update',
                             data: this.qs.stringify(submitData)
                         }).then(res => {
-                            console.log(res);
                             if (res.data.code == 2000) {
                                 this.$router.push({
                                     path: '/goods/list'
@@ -182,7 +180,6 @@
                             }
                         })
                     } else {
-                        console.log('add?')
                         if (!this.imgName) {
                             this.$message.success('请上传图片', 3);
                             return;

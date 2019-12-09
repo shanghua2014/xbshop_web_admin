@@ -1,50 +1,9 @@
 export default {
     install: (Vue, opt) => {
-        // TODO: 获取API，后台接口
-        Vue.prototype.$getAPI = cod => {
-            for (var i in API) {
-                if (API[i].code == cod) {
-                    return API[i].url;
-                }
-            }
-        }
-
-        // TODO: 全局属性
-        Vue.prototype.$service = () => {
-            return {
-                pf: 1,
-                url: "https://" + document.domain,
-                url_m: location.host == "www.huanxi.com" ?
-                    "https://m.huanxi.com" : "https://qam.huanxi.com",
-                content: {
-                    collect: "~没有收藏视频~",
-                    history: "~没有观看记录～",
-                    space: "~没有评论内容~",
-                    order: "~近三个月没有订单~"
-                }
-
-            }
-        }
-
-        // TODO: 菜单切换效果，依赖zepto
-        Vue.prototype.$menus = (_this) => {
-                $('#menusTop').find('div').each(function (e) {
-                    let a = $(this).find('a');
-                    if ('#' + _this.$route.path == a.attr('href')) {
-                        if (!$(this).hasClass('active')) {
-                            $(this).addClass('active')
-                        }
-                    } else {
-                        if ($(this).hasClass('active')) {
-                            $(this).removeClass('active')
-                        }
-                    }
-                })
-            },
-            /**
-             * AddDayCount 0返回今天日期，-1返回昨天日期
-             */
-            Vue.prototype.$getDateStr = (AddDayCount, type) => {
+        /**
+         * AddDayCount 0返回今天日期，-1返回昨天日期
+         */
+        Vue.prototype.$getDateStr = (AddDayCount, type) => {
                 var dd = new Date();
                 dd.setDate(dd.getDate() + AddDayCount); //获取AddDayCount天后的日期
                 var y = dd.getFullYear();
@@ -88,7 +47,6 @@ export default {
                 return (arr[2]);
             else
                 return null;
-
         }
         // 删除cookie
         Vue.prototype.delCookie = (name) => {
