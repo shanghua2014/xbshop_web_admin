@@ -61,8 +61,19 @@
             this.fetch()
         },
         methods: {
-            onDelete(key) {
-                alert('暂不可用')
+            onDelete(id) {
+                this.tableData = this.tableData.filter(item => item.id !== id);
+                this.axios({
+                    method: 'post',
+                    url: '/api/classify/del',
+                    data: {
+                        id: id
+                    }
+                }).then(res => {
+                    if (res.data.code == 2000) {
+                        this.$message.success(res.data.msg);
+                    }
+                });
             },
             // 动态分页
             handleTableChange(pagination, filters, sorter) {
