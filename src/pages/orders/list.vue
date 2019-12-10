@@ -1,69 +1,82 @@
 <template>
     <a-table :columns="columns" :dataSource="tableData" :rowKey="(tableData, index) => index" :pagination="pagination"
-        :loading="loading" @change="handleTableChange" bordered>
+        :loading="loading" @change="handleTableChange" :scroll="{ x: 1200 }" bordered>
         <template slot="gname" slot-scope="text">
             <span>{{text}}</span>
         </template>
 
         <template slot="title">
             <a-row>
-                <a-col :span="3">
-                    <router-link to="/goods/add">
-                        <a-button type="primary" icon="plus-circle" block>添加商品</a-button>
-                    </router-link>
-                </a-col>
                 <a-col :span="20"><b>{{this.$route.name}}</b></a-col>
-                <a-col :span="2"></a-col>
             </a-row>
         </template>
 
-        <span slot="picture" slot-scope="picture, record">
+         <span slot="picture" slot-scope="picture, record">
             <img :src="'/uploads/'+picture" @click="info('/uploads/'+picture, record.gname)" />
         </span>
 
         <template slot="operation" slot-scope="text, record">
-            <a-popconfirm v-if="columns.length" title="Sure to delete?"
+            <a-popconfirm title="Sure to delete?"
                 @confirm="() => onDelete(record.id, record.picture)">
                 <a href="javascript:;">删除</a>
             </a-popconfirm>
             &nbsp;
-            <router-link
-                :to="{path:'/goods/add', query:{id:record.id,gname:encodeURI(record.gname),classify:encodeURI(record.classify),price:record.price,eprice:record.exchangprice,rprice:record.rechargeprice,img:encodeURI(record.picture),desc:encodeURI(record.description)}}">
-                编辑</router-link>
+            <!-- <router-link
+                :to="{path:'/user/add', query:{id:record.id,gname:encodeURI(record.gname),classify:encodeURI(record.classify),price:record.price,eprice:record.exchangprice,rprice:record.rechargeprice,img:encodeURI(record.picture),desc:encodeURI(record.description)}}">
+                编辑</router-link> -->
         </template>
     </a-table>
 </template>
 <script>
+
+
     const columns = [{
-        title: 'ID',
-        dataIndex: 'id'
+        title: '收货人',
+        dataIndex: 'consignee',
+        width:100,
     }, {
-        title: '商品名称',
-        dataIndex: 'gname'
+        title: '订单号',
+        width:100,
+        dataIndex: 'ordernumber'
+    },  {
+        title: '手机号',
+        dataIndex: 'phone'
+    },{
+        title: '数量',
+        dataIndex: 'amount',
+        width:50
     }, {
-        title: '所属分类',
-        dataIndex: 'classify'
+        title: '兑换价',
+        dataIndex: 'exchangprice',
+        width:65
     }, {
-        title: '商品图片',
+        title: '收货地址',
+        dataIndex: 'address',
+        width:350
+    }, {
+        title: '产品名称',
+        dataIndex: 'pname',
+        width:150
+    },  {
+        title: '产品图',
         dataIndex: 'picture',
         scopedSlots: {
             customRender: 'picture'
         }
+    },  {
+        title: '快递单号',
+        dataIndex: 'expressn'
     }, {
-        title: '专柜价',
-        dataIndex: 'price'
+        title: '发货时间',
+        dataIndex: 'deliverytime'
     }, {
-        title: '兑换价',
-        dataIndex: 'exchangprice'
-    }, {
-        title: '闯关价',
-        dataIndex: 'rechargeprice'
-    }, {
-        title: '简介',
-        dataIndex: 'description'
+        title: '创建时间',
+        
+        dataIndex: 'createtime'
     }, {
         title: '操作',
         dataIndex: 'operation',
+        width:50,
         scopedSlots: {
             customRender: 'operation'
         },
@@ -101,19 +114,20 @@
             },
             // 删除商品
             onDelete(id, pic) {
-                this.tableData = this.tableData.filter(item => item.id !== id);
-                this.axios({
-                    method: 'post',
-                    url: '/api/goods/del',
-                    data: {
-                        id: id,
-                        picture: pic
-                    }
-                }).then(res => {
-                    if (res.data.code == 2000) {
-                        this.$message.success(res.data.msg);
-                    }
-                });
+                alert('暂未开通')
+                // this.tableData = this.tableData.filter(item => item.id !== id);
+                // this.axios({
+                //     method: 'post',
+                //     url: '/api/goods/del',
+                //     data: {
+                //         id: id,
+                //         picture: pic
+                //     }
+                // }).then(res => {
+                //     if (res.data.code == 2000) {
+                //         this.$message.success(res.data.msg);
+                //     }
+                // });
             },
             // 动态分页
             handleTableChange(pagination, filters, sorter) {
@@ -134,7 +148,7 @@
                 this.loading = true;
                 this.axios({
                     method: 'post',
-                    url: '/api/goods/list',
+                    url: '/api/order/list',
                     data: {
                         size: this.pagination.pageSize,
                         ...params,
@@ -145,10 +159,16 @@
                         const pagination = {
                             ...this.pagination
                         };
+                        // for (var i in list) {
+                        //     list[i].deliverytime = this.$formatDate(list[i].deliverytime, 2);
+                        //     list[i].createtime = this.$formatDate(list[i].createtime, 2);
+                        // }
+                        // this.tableData = list;
                         this.tableData = this.$dataSplicing({
                             listData: r.result.list,
-                            field: ['price', 'exchangprice', 'rechargeprice'],
-                            fn: this.$formatMoney
+                            field: ['deliverytime', 'createtime'],
+                            fn: this.$formatDate,
+                            fnArg: 2
                         })
                         this.pagination = pagination;
                         pagination.total = r.result.maxtotal
@@ -163,16 +183,16 @@
 
 </script>
 <style>
-    .ant-table-tbody img {
-        max-width: 100px;
-    }
-
-    .ant-modal-confirm-body .ant-modal-confirm-content {
-        margin-left: 0;
-    }
-
-    .ant-modal-confirm .ant-modal-body {
-        padding: 10px;
-    }
-
+.ant-table-tbody img {
+    max-width: 100px;
+}
+.ant-modal-confirm-body .ant-modal-confirm-content {
+    margin-left:0;
+}
+.ant-modal-confirm .ant-modal-body{
+    padding:10px;
+}
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td{
+    padding:10px;
+}
 </style>

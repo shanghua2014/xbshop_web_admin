@@ -60,8 +60,8 @@ export default new Router({
                 },
                 {
                     path: '/orders',
-                    component: resolve => require(['@/pages/orders/orders'], resolve),
-                    name: '订单管理'
+                    component: resolve => require(['@/pages/orders/list'], resolve),
+                    name: '订单列表'
                 },
                 {
                     path: '/users',
@@ -75,7 +75,6 @@ export default new Router({
                 }
             ]
         },
-        
         {
             path: '/login',
             name: 'Login',
@@ -86,7 +85,6 @@ export default new Router({
             name: 'ChangePhone',
             component: ChangePhone
         },
-
         {
             path: '/address',
             name: 'address',

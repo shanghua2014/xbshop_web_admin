@@ -142,7 +142,6 @@
                     },
                 }).then(res => {
                     let r = res.data;
-                    let list = r.result.list;
                     if (r.code == 2000) {
                         const pagination = {
                             ...this.pagination
@@ -161,9 +160,6 @@
 
 </script>
 <style>
-.ant-table-tbody img {
-    max-width: 100px;
-}
 .ant-modal-confirm-body .ant-modal-confirm-content {
     margin-left:0;
 }
