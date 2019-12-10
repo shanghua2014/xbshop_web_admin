@@ -65,7 +65,7 @@ export default new Router({
                 },
                 {
                     path: '/users',
-                    component: resolve => require(['@/pages/users/users'], resolve),
+                    component: resolve => require(['@/pages/users/list'], resolve),
                     name: '用户管理'
                 },
                 {
